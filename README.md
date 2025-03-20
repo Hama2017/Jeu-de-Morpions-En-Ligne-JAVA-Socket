@@ -8,7 +8,7 @@ Ce document présente les trois versions du jeu de morpion en réseau, montrant 
 La première version est une implémentation simple en Java où le serveur joue automatiquement contre un client humain.
 
 ### Aperçu
-![Version 1 - Java Client-Serveur Simple](images/v1.png)
+![Version 1 - Java Client-Serveur Simple](src/images/v1.png)
 
 ### Caractéristiques
 - **Serveur Java**: Génère des coups aléatoires automatiquement
@@ -47,7 +47,7 @@ La première version est une implémentation simple en Java où le serveur joue 
 La deuxième version ajoute des interfaces graphiques aux clients Java et permet à deux joueurs humains de s'affronter.
 
 ### Aperçu
-![Version 2 - Client Java avec IHM](images/v2.png)
+![Version 2 - Client Java avec IHM](src/images/v2.png)
 
 ### Caractéristiques
 - **Serveur Java**: Fonctionne en arrière-plan pour coordonner le jeu
@@ -81,7 +81,7 @@ La deuxième version ajoute des interfaces graphiques aux clients Java et permet
 La troisième version est une architecture multi-langage où le serveur possède une interface graphique et les clients sont en ligne de commande, implémentés en différents langages.
 
 ### Aperçu
-![Version 3 - Multi-langage avec Serveur IHM](images/v3.png)
+![Version 3 - Multi-langage avec Serveur IHM](src/images/v3.png)
 
 ### Aperçu du Programme JAVA Serveur
 ![Java Serveur](images/java.png)
