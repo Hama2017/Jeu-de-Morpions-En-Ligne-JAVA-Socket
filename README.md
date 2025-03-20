@@ -1,92 +1,143 @@
-# reseaux - TP 5 Les sockets
+# Jeu de Morpion en Réseau - SOCKETS
+**Auteur: Hamadou BA**
 
+Ce document présente les trois versions du jeu de morpion en réseau, montrant l'évolution progressive du projet.
 
+## Version 1: Java Client-Serveur Simple
 
-## Getting started
+La première version est une implémentation simple en Java où le serveur joue automatiquement contre un client humain.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### Aperçu
+![Version 1 - Java Client-Serveur Simple](placeholder_version1.png)
+*Insérer une capture d'écran de la Version 1 ici*
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### Caractéristiques
+- **Serveur Java**: Génère des coups aléatoires automatiquement
+- **Client Java**: Interface en ligne de commande pour le joueur humain
+- **Pas d'interface graphique**: Communication uniquement via console
 
-## Add your files
+### Architecture
+- Un serveur qui accepte une seule connexion client
+- Le serveur joue automatiquement avec une stratégie aléatoire
+- Le client envoie ses coups via une interface console
+- Communication via des sockets TCP standards
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### Fonctionnement
+1. Le serveur démarre et attend une connexion
+2. Le client se connecte et envoie son pseudo
+3. Le serveur joue automatiquement le premier coup
+4. Le client joue en entrant des coordonnées
+5. Les deux parties communiquent l'état du jeu via des messages textuels
 
-```
-cd existing_repo
-git remote add origin https://www-apps.univ-lehavre.fr/forge/bh243413/reseaux-tp-5-les-sockets.git
-git branch -M main
-git push -uf origin main
-```
+### Avantages et Limitations
+**Avantages**:
+- Simplicité de conception
+- Facilité d'implémentation
+- Un seul langage (Java)
 
-## Integrate with your tools
+**Limitations**:
+- Expérience utilisateur minimaliste
+- Le serveur joue de façon aléatoire (pas d'IA)
+- Pas d'interface graphique
+- Un seul client à la fois
 
-- [ ] [Set up project integrations](https://www-apps.univ-lehavre.fr/forge/bh243413/reseaux-tp-5-les-sockets/-/settings/integrations)
+---
 
-## Collaborate with your team
+## Version 2: Client Java avec IHM
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+La deuxième version ajoute des interfaces graphiques aux clients Java et permet à deux joueurs humains de s'affronter.
 
-## Test and Deploy
+### Aperçu
+![Version 2 - Client Java avec IHM](images/java.png)
+*Insérer une capture d'écran de la Version 2 ici*
 
-Use the built-in continuous integration in GitLab.
+### Caractéristiques
+- **Serveur Java**: Fonctionne en arrière-plan pour coordonner le jeu
+- **Deux clients Java**: Chacun avec une interface graphique Swing
+- **IHM complète**: Grille de jeu cliquable et affichage de l'état
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Architecture
+- Un serveur qui accepte deux connexions client
+- Deux clients avec interfaces graphiques identiques
+- Le serveur transmet les coups entre les clients
+- Communication via sockets TCP standards
 
-***
+### Fonctionnement
+1. Le serveur démarre et attend deux connexions client
+2. Les deux clients se connectent et envoient leurs pseudos
+3. Les clients alternent les tours en cliquant sur la grille
+4. L'interface affiche l'état actuel et le joueur dont c'est le tour
+5. Le serveur détecte les conditions de victoire ou de match nul
 
-# Editing this README
+### Améliorations par rapport à la Version 1
+- Interfaces graphiques pour les deux joueurs
+- Affichage intuitif de la grille
+- Deux joueurs humains
+- Indication visuelle du tour actuel
+- Feedback immédiat des coups joués
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+---
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Version 3: Multi-langage avec Serveur IHM
 
-## Name
-Choose a self-explaining name for your project.
+La troisième version est une architecture multi-langage où le serveur possède une interface graphique et les clients sont en ligne de commande, implémentés en différents langages.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### Aperçu
+![Version 3 - Multi-langage avec Serveur IHM](images/.png)
+*Insérer une capture d'écran de la Version 3 ici*
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+### Caractéristiques
+- **Serveur Java avec IHM**: Interface graphique Swing pour superviser les parties
+- **Client Python**: Interface ligne de commande avec affichage coloré
+- **Client C**: Interface ligne de commande optimisée pour macOS
+- **Mise en évidence du dernier coup**: Sur tous les composants (serveur et clients)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Architecture
+- Un serveur central avec interface graphique de supervision
+- Clients en différents langages (Java, Python, C)
+- Protocole de communication texte standardisé
+- Fonctionnalités adaptées à chaque langage
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Fonctionnement
+1. Le serveur démarre et affiche une interface graphique de supervision
+2. Les clients (en Python ou C) se connectent et envoient leurs pseudos
+3. Les clients jouent à tour de rôle via leur interface console
+4. Le serveur affiche en temps réel l'état du jeu et le dernier coup joué
+5. Tous les composants mettent en évidence le dernier coup pour meilleure lisibilité
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Améliorations par rapport à la Version 2
+- Architecture multi-langage
+- Interface de supervision sur le serveur
+- Clients légers en ligne de commande
+- Mise en évidence du dernier coup sur tous les composants
+- Meilleure séparation des responsabilités
+- Adaptabilité à différents environnements (Python, C, Java)
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+---
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Comparaison des Versions
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+| Caractéristique            | Version 1                | Version 2                   | Version 3                       |
+|----------------------------|--------------------------|-----------------------------|---------------------------------|
+| Langages                   | Java uniquement          | Java uniquement             | Java, Python, C                 |
+| Interface Serveur          | Console                  | Console                     | Graphique                       |
+| Interface Client           | Console                  | Graphique                   | Console                         |
+| Nombre de clients          | 1 client                 | 2 clients                   | 2 clients                       |
+| Rôle du serveur            | Joue automatiquement     | Coordonne uniquement        | Coordonne et supervise          |
+| Affichage dernier coup     | Non                      | Oui (client uniquement)     | Oui (serveur et clients)        |
+| Complexité d'implémentation| Basse                    | Moyenne                     | Haute                           |
+| Flexibilité                | Limitée                  | Modérée                     | Élevée                          |
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## Conclusion
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+L'évolution du jeu de morpion en réseau illustre une progression naturelle dans le développement d'applications distribuées:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+1. **Version 1**: Implémentation fondamentale du concept client-serveur
+2. **Version 2**: Amélioration de l'expérience utilisateur avec des interfaces graphiques
+3. **Version 3**: Adoption d'une architecture multi-langage avec séparation claire des responsabilités
 
-## License
-For open source projects, say how it is licensed.
+Chaque version a ses propres avantages et cas d'utilisation. La Version 1 est idéale pour l'apprentissage des concepts de base, la Version 2 offre une meilleure expérience utilisateur pour les joueurs, tandis que la Version 3 démontre l'interopérabilité entre différents langages de programmation et la supervision centralisée.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---
+
+© 2025 Hamadou BA - Tous droits réservés
