@@ -38,20 +38,21 @@ public class TableJeux {
     public int jouer(Pion pion) {
         Point coord = pion.getCoordonnes();
         if (coord.x < 0 || coord.x >= TAILLE || coord.y < 0 || coord.y >= TAILLE || table[coord.x][coord.y] != null) {
-            return 2; 
+            return 2; // Case invalide ou déjà occupée
         }
         table[coord.x][coord.y] = pion;
 
         if (estGagnant(pion)) {
             joueurGagnant = pion.getCouleur().equals(J1.getCouleur()) ? J1 : J2;
-            return 1;
+            return 1; // Victoire
         }
-        return 0;
+        return 0; // Coup valide, pas de victoire
     }
 
     private boolean estGagnant(Pion pion) {
         Color couleur = pion.getCouleur();
 
+        // Vérification des lignes et colonnes
         for (int i = 0; i < TAILLE; i++) {
             if ((table[i][0] != null && table[i][1] != null && table[i][2] != null &&
                     table[i][0].getCouleur().equals(couleur) &&
@@ -65,6 +66,7 @@ public class TableJeux {
             }
         }
 
+        // Vérification des diagonales
         if ((table[0][0] != null && table[1][1] != null && table[2][2] != null &&
              table[0][0].getCouleur().equals(couleur) &&
              table[1][1].getCouleur().equals(couleur) &&
@@ -79,6 +81,18 @@ public class TableJeux {
         return false;
     }
 
+    public boolean estTableauPlein() {
+        for (int i = 0; i < TAILLE; i++) {
+            for (int j = 0; j < TAILLE; j++) {
+                if (table[i][j] == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Format pour affichage console
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -91,5 +105,34 @@ public class TableJeux {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    // Format pour envoyer aux clients
+    public String toStringForClient() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < TAILLE; i++) {
+            for (int j = 0; j < TAILLE; j++) {
+                if (table[i][j] == null) {
+                    sb.append("E"); // Empty
+                } else if (table[i][j].getCouleur().equals(J1.getCouleur())) {
+                    sb.append("X"); // Joueur 1
+                } else {
+                    sb.append("O"); // Joueur 2
+                }
+                
+                // Ajouter séparateur sauf pour le dernier élément
+                if (!(i == TAILLE-1 && j == TAILLE-1)) {
+                    sb.append(",");
+                }
+            }
+        }
+        return sb.toString();
+    }
+    
+    public Pion getPion(int x, int y) {
+        if (x >= 0 && x < TAILLE && y >= 0 && y < TAILLE) {
+            return table[x][y];
+        }
+        return null;
     }
 }
