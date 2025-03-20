@@ -1,0 +1,40 @@
+_HiStOrY_V2_
+clear
+\l
+clear
+\! clear
+CREATE DATABASE csv_import;
+CREATE DATABASE csv_import
+\l
+\q
+CREATE DATABASE csv_import;
+\q
+CREATE TABLE occurrences (
+    index_id INT PRIMARY KEY,
+    occurence INT
+);
+COPY occurrences(index_id, occurence) FROM '/tmp/donnees_index_occurence_complet.csv' DELIMITER ',' CSV HEADER;
+\q
+ALTER TABLE occurrences DISABLE TRIGGER ALL;
+\COPY occurrences(index_id, occurence) FROM '/Users/hamaba/Documents/csv/donnees_index_occurence_complet.csv' DELIMITER ',' CSV HEADER;
+COPY occurrences(index_id, occurence) FROM '/tmp/donnees_index_occurence_complet.csv' DELIMITER ',' CSV HEADER;
+COPY occurrences(index_id, occurence) FROM '/tmp/donnees_index_occurence_complet_no_last.csv' DELIMITER ',' CSV HEADER;
+\q
+\ld
+\dl
+\d
+\dt
+\dl
+\ld
+\l
+\c  tp-final-symfony
+SELECT * COUNT(*);
+SELECT * COUNT(*) FROM  tp-final-symfony;
+SELECT COUNT(*) FROM  tp-final-symfony;
+SELECT COUNT(*);
+SELECT COUNT(*) FROM ETABLISSEMENT;
+SELECT COUNT(*) FROM ETABLISSEMENT;
+SELECT COUNT(*) FROM ETABLISSEMENT;
+\d
+\dt etablissement
+\s etablissement
